@@ -52,9 +52,6 @@ A modern job board application built with Go backend and React TypeScript fronte
 3. **Install frontend dependencies**
 
    ```bash
-   # Install root dependencies
-   npm install
-
    # Install frontend dependencies (note: you need to cd into frontend directory)
    cd frontend
    npm install
