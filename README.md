@@ -66,6 +66,7 @@ A modern job board application built with Go backend and React TypeScript fronte
 
 5. **Install Air for Go hot reloading**
    ```bash
+   cd ..
    go install github.com/air-verse/air@latest
    ```
 
