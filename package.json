@@ -8,6 +8,7 @@
     "frontend:build": "cd frontend && npm run build",
     "frontend:start": "cd frontend && npm start",
     "frontend:install": "cd frontend && npm install",
+    "install:all": "npm install && cd frontend && npm install && cd ..",
     "backend:dev": "air",
     "setup": "npm run frontend:install"
   },

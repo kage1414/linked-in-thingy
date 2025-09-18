@@ -76,5 +76,14 @@ frontend:
 # Complete setup
 setup: db-up frontend
 	@echo "Setup complete!"
-	@echo "Run 'make dev' to start development mode"
+	@echo "Run 'npm run dev' to start development mode"
 	@echo "Or run 'make run' to start the application"
+
+# Complete setup with all dependencies
+setup-all: frontend
+	@echo "Installing all dependencies..."
+	@npm install
+	@cd frontend && npm install && cd ..
+	@echo "Installing Air for hot reloading..."
+	@go install github.com/air-verse/air@latest
+	@echo "Setup complete! Run 'make db-up' then 'npm run dev'"

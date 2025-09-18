@@ -52,7 +52,13 @@ A modern job board application built with Go backend and React TypeScript fronte
 3. **Install frontend dependencies**
 
    ```bash
-   npm run install:frontend
+   # Install root dependencies
+   npm install
+
+   # Install frontend dependencies (note: you need to cd into frontend directory)
+   cd frontend
+   npm install
+   cd ..
    ```
 
 4. **Install development dependencies**
@@ -63,7 +69,7 @@ A modern job board application built with Go backend and React TypeScript fronte
 
 5. **Install Air for Go hot reloading**
    ```bash
-   go install github.com/cosmtrek/air@latest
+   go install github.com/air-verse/air@latest
    ```
 
 ## Development
