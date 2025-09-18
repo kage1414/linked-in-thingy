@@ -1,0 +1,26 @@
+{
+  "name": "job-board",
+  "version": "1.0.0",
+  "description": "A job board application with Go backend and React frontend",
+  "main": "main.go",
+  "scripts": {
+    "dev": "concurrently --kill-others --prefix \"[{name}]\" --names \"backend,frontend\" \"air\" \"cd frontend && npm start\"",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm start",
+    "frontend:install": "cd frontend && npm install",
+    "backend:dev": "air",
+    "setup": "npm run frontend:install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "job-board",
+    "go",
+    "react",
+    "typescript",
+    "graphql"
+  ],
+  "author": "",
+  "license": "MIT"
+}

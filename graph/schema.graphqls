@@ -1,0 +1,54 @@
+type Job {
+  id: ID!
+  title: String!
+  company: String!
+  description: String!
+  location: String!
+  salary: String
+  requirements: [String!]!
+  benefits: [String!]!
+  postedAt: String!
+  videoUrl: String
+}
+
+type Video {
+  id: ID!
+  jobId: ID!
+  title: String!
+  url: String!
+  duration: Int
+  thumbnail: String
+}
+
+type Query {
+  jobs: [Job!]!
+  job(id: ID!): Job
+  videos: [Video!]!
+  video(id: ID!): Video
+}
+
+type Mutation {
+  createJob(input: JobInput!): Job!
+  updateJob(id: ID!, input: JobInput!): Job!
+  deleteJob(id: ID!): Boolean!
+  createVideo(input: VideoInput!): Video!
+}
+
+input JobInput {
+  title: String!
+  company: String!
+  description: String!
+  location: String!
+  salary: String
+  requirements: [String!]!
+  benefits: [String!]!
+  videoUrl: String
+}
+
+input VideoInput {
+  jobId: ID!
+  title: String!
+  url: String!
+  duration: Int
+  thumbnail: String
+}
