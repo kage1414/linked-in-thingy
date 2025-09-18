@@ -23,9 +23,6 @@ This is a job board application with a Go backend (REST API) and React TypeScrip
 - Global components are contained in ./frontend/src/components
 - Business logic should be contained in [ComponentName].container.tsx
 - Visual logic should be contained in [ComponentName].tsx
-- Test files should be named [ComponentName].test.tsx for React files.
-- Test files should be named [ComponentName].test.ts for non-react files.
-- Helper functions should be in utils.ts. If only used locally, they should be in their component folder. If used globally, they should be in frontend/src/utils.ts
 
 ## Development Guidelines
 
@@ -35,6 +32,9 @@ This is a job board application with a Go backend (REST API) and React TypeScrip
 - **Error Handling**: Implement proper error boundaries and user-friendly error messages
 - **Loading States**: Always provide loading indicators for async operations
 - **Accessibility**: Include proper ARIA attributes and semantic HTML
+- Test files should be named [ComponentName].test.tsx for React files.
+- Test files should be named [ComponentName].test.ts for non-react files.
+- Helper functions should be in utils.ts. If only used locally, they should be in their component folder. If used globally, they should be in frontend/src/utils.ts
 
 ### Component Design
 
