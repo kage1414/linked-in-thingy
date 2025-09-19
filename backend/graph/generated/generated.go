@@ -3,7 +3,7 @@ package generated
 import (
 	"context"
 
-	"job-board/graph/model"
+	"job-board/backend/graph/model"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/vektah/gqlparser/v2/ast"
@@ -63,4 +63,9 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 			Data: []byte(`{"data":{}}`),
 		}
 	}
+}
+
+func (e *executableSchema) Complexity(typeName, field string, childComplexity int, args map[string]interface{}) (int, bool) {
+	// Return default complexity for all fields
+	return childComplexity, true
 }

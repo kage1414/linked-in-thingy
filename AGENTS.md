@@ -19,10 +19,24 @@ This is a job board application with a Go backend (REST API) and React TypeScrip
 - Keep related files together in component directories
 - Separate CSS files from component logic
 - Use clean, descriptive file names
+- Frontend code belongs in ./frontend
+- Backend code belongs in ./backend
+- Database code belonds in ./backend/database
+- main.go, go.sum, and go.mod are the only backend-related files allowed in the top level directory. everything else belongs in ./backend
 - Maintain consistent directory structure
-- Global components are contained in ./frontend/src/components
+- Global reusable components are contained in ./frontend/src/components
+- Do not move into new directory unless asked. If rejected, component should exist in frontend/src/components
 - Business logic should be contained in [ComponentName].container.tsx
 - Visual logic should be contained in [ComponentName].tsx
+- Locally used functions should remain in their respective component folder
+- Globally used functions should exist in frontend/src
+- Local custom hooks should remain in hooks.tsx in their respective component folder.
+- Global custom hooks should exist in frontend/src/hooks
+- Global components should exist at the top level in frontend/src/components
+- No folders with a single folder as their contents
+- Global components are prefixed with LIT[ComponentName].tsx
+- Global components exist in frontend/src/components/LITComponents
+- "hooks", "assets", and "features" are the only directories allowed under frontend/src
 
 ## Development Guidelines
 
@@ -35,6 +49,18 @@ This is a job board application with a Go backend (REST API) and React TypeScrip
 - Test files should be named [ComponentName].test.tsx for React files.
 - Test files should be named [ComponentName].test.ts for non-react files.
 - Helper functions should be in utils.ts. If only used locally, they should be in their component folder. If used globally, they should be in frontend/src/utils.ts
+- If I specify a specific file, only update that file. You may fix imports if necessary. Please ask before modifying another file
+- Don't create empty files
+- Don't use useMemo
+- Don't use deprecated methods
+- Components with no business logic should use an implicit return and omit the return statement
+
+### Dependencies
+
+- Use libraries first before building helper functions.
+- Ask before importing.
+- Prefer packages with <5 dependencies
+- Prefer popular and vetted packages, > 1000000 weekly installations
 
 ### Component Design
 
@@ -49,6 +75,8 @@ This is a job board application with a Go backend (REST API) and React TypeScrip
 - Use proper React hooks (useState, useEffect, useCallback, useMemo)
 - Handle loading, error, and success states consistently
 - Implement proper cleanup for side effects
+- Any function using 3 or more hooks should be refactored into a custom hook
+- Custom hooks should have their own file
 
 ## Backend Guidelines
 

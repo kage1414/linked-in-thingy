@@ -1,23 +1,23 @@
 # GraphQL configuration
 schema:
-  - graph/schema.graphqls
+  - backend/graph/schema.graphqls
 
 exec:
-  filename: graph/generated/generated.go
+  filename: backend/graph/generated/generated.go
   package: generated
 
 model:
-  filename: graph/model/models_gen.go
+  filename: backend/graph/model/models_gen.go
   package: model
 
 resolver:
   layout: follow-schema
-  dir: graph
+  dir: backend/graph
   package: graph
   filename: resolver.go
 
 autobind:
-  - "job-board/graph/model"
+  - "job-board/backend/graph/model"
 
 models:
   ID:

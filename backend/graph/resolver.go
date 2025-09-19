@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"job-board/graph/model"
+	"job-board/backend/graph/model"
 )
 
 // This file will not be regenerated automatically.
@@ -23,7 +23,7 @@ func (r *Resolver) Jobs(ctx context.Context) ([]*model.Job, error) {
 			Company:     "Tech Corp",
 			Description: "We are looking for a senior software engineer to join our team...",
 			Location:    "San Francisco, CA",
-			Salary:      "$120,000 - $150,000",
+			Salary:      stringPtr("$120,000 - $150,000"),
 			Requirements: []string{
 				"5+ years of experience",
 				"Proficiency in Go and React",
@@ -35,7 +35,7 @@ func (r *Resolver) Jobs(ctx context.Context) ([]*model.Job, error) {
 				"Flexible work hours",
 			},
 			PostedAt: time.Now().Add(-24 * time.Hour).Format(time.RFC3339),
-			VideoURL: "/video/1",
+			VideoURL: stringPtr("/video/1"),
 		},
 		{
 			ID:          "2",
@@ -43,7 +43,7 @@ func (r *Resolver) Jobs(ctx context.Context) ([]*model.Job, error) {
 			Company:     "StartupXYZ",
 			Description: "Join our fast-growing startup as a frontend developer...",
 			Location:    "Remote",
-			Salary:      "$80,000 - $100,000",
+			Salary:      stringPtr("$80,000 - $100,000"),
 			Requirements: []string{
 				"3+ years of React experience",
 				"TypeScript proficiency",
@@ -55,7 +55,7 @@ func (r *Resolver) Jobs(ctx context.Context) ([]*model.Job, error) {
 				"Learning budget",
 			},
 			PostedAt: time.Now().Add(-48 * time.Hour).Format(time.RFC3339),
-			VideoURL: "/video/2",
+			VideoURL: stringPtr("/video/2"),
 		},
 	}
 	return jobs, nil
@@ -84,16 +84,16 @@ func (r *Resolver) Videos(ctx context.Context) ([]*model.Video, error) {
 			JobID:     "1",
 			Title:     "Company Culture Video",
 			URL:       "/video/1",
-			Duration:  120,
-			Thumbnail: "/thumbnails/1.jpg",
+			Duration:  intPtr(120),
+			Thumbnail: stringPtr("/thumbnails/1.jpg"),
 		},
 		{
 			ID:        "2",
 			JobID:     "2",
 			Title:     "Team Introduction",
 			URL:       "/video/2",
-			Duration:  90,
-			Thumbnail: "/thumbnails/2.jpg",
+			Duration:  intPtr(90),
+			Thumbnail: stringPtr("/thumbnails/2.jpg"),
 		},
 	}
 	return videos, nil
@@ -168,4 +168,14 @@ func (r *Resolver) CreateVideo(ctx context.Context, input model.VideoInput) (*mo
 		Thumbnail: input.Thumbnail,
 	}
 	return video, nil
+}
+
+// Helper function to create string pointer
+func stringPtr(s string) *string {
+	return &s
+}
+
+// Helper function to create int pointer
+func intPtr(i int) *int {
+	return &i
 }

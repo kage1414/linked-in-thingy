@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
-	"os"
+	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -12,45 +12,27 @@ import (
 
 var DB *gorm.DB
 
-// DatabaseConfig holds database configuration
-type DatabaseConfig struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	DBName   string
-	SSLMode  string
-}
-
-// GetDatabaseConfig returns database configuration from environment variables
-func GetDatabaseConfig() *DatabaseConfig {
-	return &DatabaseConfig{
-		Host:     getEnv("DB_HOST", "localhost"),
-		Port:     getEnv("DB_PORT", "5432"),
-		User:     getEnv("DB_USER", "postgres"),
-		Password: getEnv("DB_PASSWORD", "postgres"),
-		DBName:   getEnv("DB_NAME", "jobboard"),
-		SSLMode:  getEnv("DB_SSLMODE", "disable"),
-	}
-}
-
 // ConnectDatabase establishes connection to PostgreSQL database
-func ConnectDatabase() error {
-	config := GetDatabaseConfig()
-	
-	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		config.Host, config.Port, config.User, config.Password, config.DBName, config.SSLMode)
+func ConnectDatabase(dsn string) error {
+	newLogger := logger.New(
+		log.New(log.Writer(), "\r\n", log.LstdFlags), // io writer
+		logger.Config{
+			SlowThreshold:             time.Second,   // Slow SQL threshold
+			LogLevel:                  logger.Silent, // Log level
+			IgnoreRecordNotFoundError: true,          // Ignore ErrRecordNotFound error for logger
+			Colorful:                  true,          // Disable color
+		},
+	)
 
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
+		Logger: newLogger,
 	})
-
 	if err != nil {
 		return fmt.Errorf("failed to connect to database: %w", err)
 	}
 
-	log.Println("Successfully connected to PostgreSQL database")
+	log.Println("Database connected successfully!")
 	return nil
 }
 
@@ -190,13 +172,6 @@ func SeedDatabase() error {
 }
 
 // Helper functions
-func getEnv(key, defaultValue string) string {
-	if value := os.Getenv(key); value != "" {
-		return value
-	}
-	return defaultValue
-}
-
 func stringPtr(s string) *string {
 	return &s
 }
